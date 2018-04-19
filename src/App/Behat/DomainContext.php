@@ -42,10 +42,19 @@ class DomainContext implements Context
     }
 
     /**
-     * @Then there is new :organizationName organization
+     * @Then there is new :orgName organization
      */
-    public function thereIsNewOrganization(string $organizationName)
+    public function thereIsNewOrganization(string $orgName)
     {
-        Assert::eq($organizationName, $this->organization->getTitle());
+        Assert::eq($orgName, $this->organization->getTitle());
+    }
+
+    /**
+     * @Then :user is founder of :orgName organization
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
+     */
+    public function isFounderOfOrganization(string $user, string $orgName)
+    {
+        Assert::eq($this->user, $this->organization->getFounder());
     }
 }
