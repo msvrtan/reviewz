@@ -8,4 +8,9 @@ Feature:
     When I approve "Local meetup" organization
     Then "Local meetup" organization is approved
 
+  Scenario: Reject new organization
+    Given there is new "Local meetup" organization
+    When I approve "Local meetup" organization
+    Then "Local meetup" organization is rejected
+
 
