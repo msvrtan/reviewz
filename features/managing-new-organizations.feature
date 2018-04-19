@@ -4,7 +4,7 @@ Feature:
   I need to approve/reject new organizations
 
   Scenario: Approve new organization
-    Given there is new "Local meetup" organization
+    Given someone just created "Local meetup" organization
     When I approve "Local meetup" organization
     Then "Local meetup" organization is approved
 

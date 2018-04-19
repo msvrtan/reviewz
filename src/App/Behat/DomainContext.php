@@ -19,11 +19,20 @@ class DomainContext implements Context
 
     /**
      * @Given I'am logged in as :user
-     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
-    public function iamLoggedInAs(string $user)
+    public function iamLoggedInAs()
     {
         $this->user = \Mockery::mock(UserEntity::class);
+    }
+
+    /**
+     * @Given someone just created :orgName organization
+     */
+    public function someoneJustCreatedOrganization(string $orgName)
+    {
+        $this->organization = new OrganizationEntity(
+            $orgName, 'A description', \Mockery::mock(UserEntity::class), \Mockery::mock(CityEntity::class)
+        );
     }
 
     /**
@@ -42,6 +51,14 @@ class DomainContext implements Context
     }
 
     /**
+     * @When I approve :orgName organization
+     */
+    public function iApproveOrganization()
+    {
+        $this->organization->approve();
+    }
+
+    /**
      * @Then there is new :orgName organization
      */
     public function thereIsNewOrganization(string $orgName)
@@ -51,10 +68,17 @@ class DomainContext implements Context
 
     /**
      * @Then :user is founder of :orgName organization
-     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
-    public function isFounderOfOrganization(string $user, string $orgName)
+    public function isFounderOfOrganization()
     {
         Assert::eq($this->user, $this->organization->getFounder());
+    }
+
+    /**
+     * @Then :orgName organization is approved
+     */
+    public function organizationIsApproved()
+    {
+        Assert::true($this->organization->isApproved());
     }
 }
