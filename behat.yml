@@ -1,0 +1,10 @@
+default:
+    suites:
+        default:
+            contexts:
+                - App\Behat\DomainContext
+
+    extensions:
+        RMiller\BehatSpec\Extension\BehatSpecExtension\BehatExtension:
+            path:  vendor/bin/phpspec #default value is bin/phpspec
+            config: phpspec.yml #optional

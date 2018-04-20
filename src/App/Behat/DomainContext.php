@@ -57,7 +57,13 @@ class DomainContext implements Context
     {
         $this->organization->approve();
     }
-
+    /**
+     * @When I reject :orgNamr organization
+     */
+    public function iRejectOrganization()
+    {
+        $this->organization->reject();
+    }
     /**
      * @Then there is new :orgName organization
      */
@@ -80,5 +86,12 @@ class DomainContext implements Context
     public function organizationIsApproved()
     {
         Assert::true($this->organization->isApproved());
+    }
+    /**
+     * @Then :orgName organization is rejected
+     */
+    public function organizationIsRejected()
+    {
+        Assert::false($this->organization->isApproved());
     }
 }

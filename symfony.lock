@@ -227,6 +227,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "rmiller/caser": {
+        "version": "0.1.0"
+    },
     "sebastian/code-unit-reverse-lookup": {
         "version": "1.0.1"
     },
