@@ -3,6 +3,7 @@
 namespace App\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Geo\Entity\CityEntity;
 use Geo\Entity\CountryEntity;
 use Mockery\MockInterface;
@@ -93,5 +94,21 @@ class DomainContext implements Context
     public function organizationIsRejected()
     {
         Assert::false($this->organization->isApproved());
+    }
+
+    /**
+     * @Given there is new :orgName organization with :numberOfMembers members
+     */
+    public function thereIsNewOrganizationWithMembers($arg1, $arg2)
+    {
+        throw new PendingException();
+    }
+
+    /**
+     * @Then :arg1 organization has no members
+     */
+    public function organizationHasNoMembers($arg1)
+    {
+        throw new PendingException();
     }
 }
