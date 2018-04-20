@@ -1,0 +1,25 @@
+{
+    "name": "rmiller/exemplify-extension",
+    "type": "library",
+    "description": "PhpSpec extension that adds exemplify command to generate examples in specs ",
+    "keywords": ["phpspec", "bdd"],
+    "homepage": "https://github.com/richardmiller/ExemplifyExtension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Richard Miller",
+            "email": "mrrmiller46@gmail.com"
+        }
+    ],
+    "require": {
+        "php":             ">=5.6",
+        "phpspec/phpspec": "^3.0",
+        "rmiller/caser":   "^0.1"
+    },
+    "require-dev": {
+        "behat/behat": "^3.0"
+    },
+    "autoload": {
+        "psr-4": { "RMiller\\BehatSpec\\Extension\\ExemplifyExtension\\": "" }
+    }
+}
