@@ -1,3 +1,4 @@
 formatter.name: progress
 extensions:
   Cjm\PhpSpec\Extension\TypeHintedMethodsExtension: ~
+  RMiller\BehatSpec\Extension\BehatSpecExtension\PhpSpecExtension: ~

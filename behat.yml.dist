@@ -3,3 +3,7 @@ default:
         default:
             contexts:
                 - App\Behat\DomainContext
+
+    extensions:
+        RMiller\BehatSpec\Extension\BehatSpecExtension\BehatExtension: ~
+        
