@@ -1,4 +1,7 @@
 {
+    "beberlei/assert": {
+        "version": "v2.9.5"
+    },
     "behat/behat": {
         "version": "v3.4.3"
     },
@@ -271,6 +274,9 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "simple-bus/message-bus": {
+        "version": "v3.0.1"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.2.3"
