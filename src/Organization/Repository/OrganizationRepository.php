@@ -2,11 +2,7 @@
 
 namespace Organization\Repository;
 
-class OrganizationRepository
+interface OrganizationRepository
 {
-    /** @SuppressWarnings("PHPMD.UnusedFormalParameter") */
-    public function findByTitle(string $title)
-    {
-        //@TODO;
-    }
+    public function findByTitle(string $title);
 }
