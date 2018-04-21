@@ -3,14 +3,14 @@
 namespace RMiller\BehatSpec\Extension\ExemplifyExtension\Generator;
 
 use PhpSpec\CodeGenerator\Generator\Generator;
-use PhpSpec\Console\ConsoleIO;
 use PhpSpec\CodeGenerator\TemplateRenderer;
-use PhpSpec\Util\Filesystem;
+use PhpSpec\Console\ConsoleIO;
 use PhpSpec\Locator\Resource;
+use PhpSpec\Util\Filesystem;
 use RMiller\Caser\Cased;
 
 /**
- * Generates class methods from a resource
+ * Generates class methods from a resource.
  */
 class SpecificationMethodGenerator implements Generator
 {
@@ -42,25 +42,25 @@ class SpecificationMethodGenerator implements Generator
     }
 
     /**
-     * @param Resource $resource
-     * @param string            $generation
-     * @param array             $data
+     * @param resource $resource
+     * @param string   $generation
+     * @param array    $data
      *
      * @return bool
      */
-    public function supports(Resource $resource,string $generation, array $data):bool
+    public function supports(Resource $resource, string $generation, array $data): bool
     {
         return 'specification_method' === $generation;
     }
 
     /**
-     * @param Resource $resource
-     * @param array             $data
+     * @param resource $resource
+     * @param array    $data
      */
     public function generate(Resource $resource, array $data = [])
     {
         $method = Cased::fromCamelCase($data['method']);
-        $spec = $this->filesystem->getFileContents($resource->getSpecFilename());
+        $spec   = $this->filesystem->getFileContents($resource->getSpecFilename());
 
         if ($this->exampleAlreadyExists($spec, $method)) {
             $this->informExampleAlreadyExists($resource, $method);
@@ -74,13 +74,14 @@ class SpecificationMethodGenerator implements Generator
     /**
      * @return int
      */
-    public function getPriority():int
+    public function getPriority(): int
     {
         return 0;
     }
 
     /**
      * @param $type
+     *
      * @return string
      */
     protected function getTemplate($type)
@@ -89,8 +90,9 @@ class SpecificationMethodGenerator implements Generator
     }
 
     /**
-     * @param string $spec
+     * @param string               $spec
      * @param \RMiller\Caser\Cased $method
+     *
      * @return bool
      */
     private function exampleAlreadyExists($spec, Cased $method)
@@ -98,13 +100,13 @@ class SpecificationMethodGenerator implements Generator
         $camelCaseMethod = $method->asCamelCase();
 
         $methodStrings = [
-            '$this->' . $camelCaseMethod . '(',
-            '$this::' . $camelCaseMethod . '(',
-            '$this->beConstructedThrough(\'' . $camelCaseMethod . '\'',
+            '$this->'.$camelCaseMethod.'(',
+            '$this::'.$camelCaseMethod.'(',
+            '$this->beConstructedThrough(\''.$camelCaseMethod.'\'',
         ];
 
         foreach ($methodStrings as $existingMethodString) {
-            if (strpos($spec, $existingMethodString) !== false) {
+            if (false !== strpos($spec, $existingMethodString)) {
                 return true;
             }
         }
@@ -115,32 +117,33 @@ class SpecificationMethodGenerator implements Generator
     /**
      * @param \RMiller\Caser\Cased $method
      * @param $type
+     *
      * @return string
      */
     private function renderContent(Cased $method, $type)
     {
         return $this->templates->renderString($this->getTemplate($type), [
-            '%method%' => $method->asCamelCase(),
-            '%example_name%' => 'it_should_' . $method->asSnakeCase(),
-            '%constructor_example_name%' => 'it_should_be_constructed_through_' . $method->asSnakeCase(),
+            '%method%'                   => $method->asCamelCase(),
+            '%example_name%'             => 'it_should_'.$method->asSnakeCase(),
+            '%constructor_example_name%' => 'it_should_be_constructed_through_'.$method->asSnakeCase(),
         ]);
     }
 
     /**
      * @param \PhpSpec\Locator\Resource $resource
-     * @param string $spec
-     * @param \RMiller\Caser\Cased $method
+     * @param string                    $spec
+     * @param \RMiller\Caser\Cased      $method
      * @param $type
      */
     private function addExampleToSpec(Resource $resource, $spec, Cased $method, $type)
     {
-        $spec = preg_replace('/}[ \n]*$/', rtrim($this->renderContent($method, $type)) . "\n}\n", trim($spec));
+        $spec = preg_replace('/}[ \n]*$/', rtrim($this->renderContent($method, $type))."\n}\n", trim($spec));
         $this->filesystem->putFileContents($resource->getSpecFilename(), $spec);
         $this->informExampleAdded($resource, $method);
     }
 
     /**
-     * @param Resource $resource
+     * @param resource $resource
      * @param $method
      */
     private function informExampleAdded(Resource $resource, Cased $method)
@@ -152,7 +155,7 @@ class SpecificationMethodGenerator implements Generator
     }
 
     /**
-     * @param Resource $resource
+     * @param resource $resource
      * @param $method
      */
     private function informExampleAlreadyExists(Resource $resource, Cased $method)

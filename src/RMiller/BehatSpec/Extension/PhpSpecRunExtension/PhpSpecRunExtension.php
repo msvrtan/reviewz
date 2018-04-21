@@ -16,12 +16,11 @@ class PhpSpecRunExtension implements Extension
 {
     /**
      * @param ServiceContainer $container
-     * @param array $params
+     * @param array            $params
      */
     public function load(ServiceContainer $container, array $params)
     {
         $container->define('rmiller.run_runner', function ($c) {
-
             $params = $c->getParam('rerunner', []);
             $phpspecPath = isset($params['path']) ? $params['path'] : 'bin/phpspec';
             $phpspecConfig = isset($params['config']) ? $params['config'] : null;
@@ -38,7 +37,7 @@ class PhpSpecRunExtension implements Extension
                     $c->get('rmiller.run.caching_executable_finder'),
                     $phpspecPath,
                     $phpspecConfig
-                )
+                ),
             ]);
         });
 

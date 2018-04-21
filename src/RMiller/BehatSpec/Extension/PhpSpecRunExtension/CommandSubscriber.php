@@ -14,11 +14,11 @@ class CommandSubscriber implements EventSubscriberInterface
     private $commands;
     private $io;
 
-    function __construct(CompositeRunRunner $runRunner, ConsoleIO $io, array $commands)
+    public function __construct(CompositeRunRunner $runRunner, ConsoleIO $io, array $commands)
     {
         $this->runRunner = $runRunner;
-        $this->commands = $commands;
-        $this->io = $io;
+        $this->commands  = $commands;
+        $this->io        = $io;
     }
 
     public static function getSubscribedEvents()

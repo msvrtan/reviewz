@@ -26,7 +26,7 @@ class CliFunctionChecker
      */
     public function functionCanBeUsed($function)
     {
-        return (php_sapi_name() == 'cli')
+        return ('cli' == php_sapi_name())
             && $this->executableFinder->getExecutablePath()
             && function_exists($function);
     }

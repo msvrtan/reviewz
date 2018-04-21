@@ -11,9 +11,8 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class PhpSpecExtension implements ExtensionInterface
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ContainerBuilder $container, array $config)
     {
@@ -25,7 +24,7 @@ class PhpSpecExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure(ArrayNodeDefinition $builder)
     {
@@ -39,7 +38,7 @@ class PhpSpecExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigKey()
     {
@@ -54,7 +53,7 @@ class PhpSpecExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {

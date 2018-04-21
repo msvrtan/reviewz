@@ -3,8 +3,8 @@
 namespace RMiller\BehatSpec\Extension\ExemplifyExtension\Command;
 
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
@@ -15,10 +15,10 @@ class ExemplifyCommand extends Command
     {
         $this
             ->setName('exemplify')
-            ->setDefinition(array(
+            ->setDefinition([
                     new InputArgument('class', InputArgument::REQUIRED, 'Class method belongs to'),
                     new InputArgument('method', InputArgument::REQUIRED, 'Method to describe'),
-                ))
+                ])
             ->setDescription('Adds an example for a method')
             ->addOption('confirm', null, InputOption::VALUE_NONE, 'Ask for confirmation before creating example')
             ->setHelp(<<<EOF
@@ -45,7 +45,7 @@ EOF
         $container->configure();
 
         $classname = $input->getArgument('class');
-        $method = $input->getArgument('method');
+        $method    = $input->getArgument('method');
 
         if (!$this->confirm($input, $classname, $method)) {
             return;
@@ -55,7 +55,7 @@ EOF
 
         $container->get('code_generator')->generate($resource, 'specification_method', [
             'method' => $method,
-            'type' => $this->confirmMethodType($input, $output),
+            'type'   => $this->confirmMethodType($input, $output),
         ]);
     }
 
@@ -63,6 +63,7 @@ EOF
      * @param InputInterface $input
      * @param $classname
      * @param $method
+     *
      * @return bool
      */
     private function confirm(InputInterface $input, $classname, $method)
@@ -72,7 +73,7 @@ EOF
         }
 
         $question = sprintf('Do you want to generate an example for %s::%s? (Y/n)', $classname, $method);
-        $io = $this->getApplication()->getContainer()->get('console.io');
+        $io       = $this->getApplication()->getContainer()->get('console.io');
 
         return $io->askConfirmation($question, true);
     }
@@ -87,7 +88,7 @@ EOF
             $output,
             new ChoiceQuestion(
                 'Please select the method type (defaults to instance method)',
-                ['instance method','named constructor', 'static method'],
+                ['instance method', 'named constructor', 'static method'],
                 'instance method'
             )
         ));

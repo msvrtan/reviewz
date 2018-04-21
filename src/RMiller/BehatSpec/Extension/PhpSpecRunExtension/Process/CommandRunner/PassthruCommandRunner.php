@@ -25,7 +25,7 @@ class PassthruCommandRunner implements CommandRunner
      */
     public function runCommand($path, $args)
     {
-        $command = escapeshellcmd($path) . ' ' . join(' ', array_map('escapeshellarg', $args));
+        $command = escapeshellcmd($path).' '.join(' ', array_map('escapeshellarg', $args));
         passthru($command, $exitCode);
         exit($exitCode);
     }

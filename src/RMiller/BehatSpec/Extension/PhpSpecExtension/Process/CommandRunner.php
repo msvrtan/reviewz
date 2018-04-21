@@ -6,13 +6,11 @@ interface CommandRunner
 {
     /**
      * @param string|false $path
-     *
-     * @return void
      */
     public function runCommand($path, $args);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSupported();
 }

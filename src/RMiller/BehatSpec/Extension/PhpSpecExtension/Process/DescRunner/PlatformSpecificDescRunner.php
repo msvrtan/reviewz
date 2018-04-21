@@ -31,9 +31,9 @@ class PlatformSpecificDescRunner implements DescRunner
     private $executableFinder;
 
     /**
-     * @param CommandRunner $commandRunner
+     * @param CommandRunner           $commandRunner
      * @param CachingExecutableFinder $executableFinder
-     * @param string $phpspecPath
+     * @param string                  $phpspecPath
      */
     public function __construct(
         CommandRunner $commandRunner,
@@ -41,14 +41,14 @@ class PlatformSpecificDescRunner implements DescRunner
         $phpspecPath,
         $phpspecConfig
     ) {
-        $this->commandRunner = $commandRunner;
+        $this->commandRunner    = $commandRunner;
         $this->executableFinder = $executableFinder;
-        $this->phpspecPath = $phpspecPath;
-        $this->phpspecConfig = $phpspecConfig;
+        $this->phpspecPath      = $phpspecPath;
+        $this->phpspecConfig    = $phpspecConfig;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSupported()
     {

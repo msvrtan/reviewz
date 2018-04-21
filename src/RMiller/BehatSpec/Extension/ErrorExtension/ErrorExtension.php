@@ -12,9 +12,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ErrorExtension implements ExtensionInterface
 {
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ContainerBuilder $container, array $config)
     {
@@ -23,14 +22,14 @@ class ErrorExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function configure(ArrayNodeDefinition $builder)
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigKey()
     {
@@ -45,7 +44,7 @@ class ErrorExtension implements ExtensionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {

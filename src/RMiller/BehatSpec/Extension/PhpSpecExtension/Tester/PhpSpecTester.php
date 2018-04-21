@@ -9,12 +9,12 @@ use Behat\Testwork\Tester\Setup\Setup;
 use Behat\Testwork\Tester\Setup\Teardown;
 use Behat\Testwork\Tester\SuiteTester;
 use RMiller\BehatSpec\Extension\PhpSpecExtension\Process\DescRunner;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Helper\FormatterHelper;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 class PhpSpecTester implements SuiteTester
 {
@@ -31,16 +31,16 @@ class PhpSpecTester implements SuiteTester
     ) {
         $this->baseTester = $baseTester;
         $this->specRunner = $specRunner;
-        $this->input = $input;
-        $this->output = $output;
+        $this->input      = $input;
+        $this->output     = $output;
     }
 
     /**
      * Tests provided suite specifications.
      *
-     * @param Environment $env
+     * @param Environment           $env
      * @param SpecificationIterator $iterator
-     * @param Boolean $skip
+     * @param bool                  $skip
      *
      * @return TestResult
      */
@@ -52,10 +52,10 @@ class PhpSpecTester implements SuiteTester
     /**
      * Tears down suite after a test.
      *
-     * @param Environment $env
+     * @param Environment           $env
      * @param SpecificationIterator $iterator
-     * @param Boolean $skip
-     * @param TestResult $result
+     * @param bool                  $skip
+     * @param TestResult            $result
      *
      * @return Teardown
      */
@@ -67,9 +67,9 @@ class PhpSpecTester implements SuiteTester
     /**
      * Sets up suite for a test.
      *
-     * @param Environment $env
+     * @param Environment           $env
      * @param SpecificationIterator $iterator
-     * @param Boolean $skip
+     * @param bool                  $skip
      *
      * @return Setup
      */
@@ -77,7 +77,7 @@ class PhpSpecTester implements SuiteTester
     {
         spl_autoload_register(function ($class) {
             $errorMessages = [
-                $class .' was not found.'
+                $class.' was not found.',
             ];
 
             $formatter = new FormatterHelper();

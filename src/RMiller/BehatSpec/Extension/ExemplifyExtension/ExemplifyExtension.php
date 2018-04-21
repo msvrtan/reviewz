@@ -11,7 +11,7 @@ class ExemplifyExtension implements Extension
 {
     /**
      * @param ServiceContainer $container
-     * @param array $params
+     * @param array            $params
      */
     public function load(ServiceContainer $container, array $params)
     {

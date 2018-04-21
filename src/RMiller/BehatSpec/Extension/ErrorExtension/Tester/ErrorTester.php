@@ -27,8 +27,8 @@ class ErrorTester implements StepTester
         array $observers = null
     ) {
         $this->baseTester = $baseTester;
-        $this->output = $output;
-        $this->observers = new ErrorObservers($observers);
+        $this->output     = $output;
+        $this->observers  = new ErrorObservers($observers);
     }
 
     /**
@@ -36,8 +36,8 @@ class ErrorTester implements StepTester
      *
      * @param Environment $env
      * @param FeatureNode $feature
-     * @param StepNode $step
-     * @param bool $skip
+     * @param StepNode    $step
+     * @param bool        $skip
      *
      * @return Setup
      */
@@ -55,8 +55,8 @@ class ErrorTester implements StepTester
      *
      * @param Environment $env
      * @param FeatureNode $feature
-     * @param StepNode $step
-     * @param bool $skip
+     * @param StepNode    $step
+     * @param bool        $skip
      *
      * @return StepResult
      */
@@ -78,7 +78,7 @@ class ErrorTester implements StepTester
                     sprintf('at line %s', $step->getLine()),
                 ];
 
-                $formatter = new FormatterHelper();
+                $formatter      = new FormatterHelper();
                 $formattedBlock = $formatter->formatBlock($errorMessages,
                     'error', true);
                 $this->output->writeln('');
@@ -99,9 +99,9 @@ class ErrorTester implements StepTester
      *
      * @param Environment $env
      * @param FeatureNode $feature
-     * @param StepNode $step
-     * @param bool $skip
-     * @param StepResult $result
+     * @param StepNode    $step
+     * @param bool        $skip
+     * @param StepResult  $result
      *
      * @return Teardown
      */

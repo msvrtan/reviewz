@@ -17,11 +17,11 @@ class MissingMethodErrorObserver implements ErrorObserver
 
     public function notify(FatalThrowableError $error)
     {
-        if (strpos($error->getMessage(), 'Call to undefined method') === false) {
+        if (false === strpos($error->getMessage(), 'Call to undefined method')) {
             return;
         }
 
-        $missing = trim(substr($error->getMessage(), strlen('Fatal error: Call to undefined method')));
+        $missing              = trim(substr($error->getMessage(), strlen('Fatal error: Call to undefined method')));
         list($class, $method) = explode('::', $missing);
 
         $this->exemplifyRunner->runExemplifyCommand($class, substr($method, 0, -2));
