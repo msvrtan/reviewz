@@ -6,8 +6,16 @@ use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
 use Geo\Entity\CityEntity;
 use Geo\Entity\CountryEntity;
+use Miro\CreateUser;
+use Miro\CreateUserHandler;
 use Mockery\MockInterface;
 use Organization\Entity\OrganizationEntity;
+use SimpleBus\Message\Bus\Middleware\MessageBusSupportingMiddleware;
+use SimpleBus\Message\CallableResolver\CallableMap;
+use SimpleBus\Message\CallableResolver\ServiceLocatorAwareCallableResolver;
+use SimpleBus\Message\Handler\DelegatesToMessageHandlerMiddleware;
+use SimpleBus\Message\Handler\Resolver\NameBasedMessageHandlerResolver;
+use SimpleBus\Message\Name\ClassBasedNameResolver;
 use User\Entity\UserEntity;
 use Webmozart\Assert\Assert;
 
@@ -58,6 +66,7 @@ class DomainContext implements Context
     {
         $this->organization->approve();
     }
+
     /**
      * @When I reject :orgNamr organization
      */
@@ -65,6 +74,7 @@ class DomainContext implements Context
     {
         $this->organization->reject();
     }
+
     /**
      * @Then there is new :orgName organization
      */
@@ -88,6 +98,7 @@ class DomainContext implements Context
     {
         Assert::true($this->organization->isApproved());
     }
+
     /**
      * @Then :orgName organization is rejected
      */
@@ -101,7 +112,38 @@ class DomainContext implements Context
      */
     public function thereIsNewOrganizationWithMembers($arg1, $arg2)
     {
+        $commandBus = $this->getCommandBus();
+
+        $commandBus->handle(new CreateUser());
+
         throw new PendingException();
+    }
+
+    private function getCommandBus()
+    {
+        $commandBus = new MessageBusSupportingMiddleware();
+
+        $commandHandlersByCommandName = [
+            CreateUser::class => CreateUserHandler::class,
+        ];
+
+        $serviceLocator = function ($serviceId) {
+            return new $serviceId();
+        };
+
+        $commandHandlerMap = new CallableMap(
+            $commandHandlersByCommandName,
+            new ServiceLocatorAwareCallableResolver($serviceLocator)
+        );
+
+        $commandHandlerResolver = new NameBasedMessageHandlerResolver(new ClassBasedNameResolver(), $commandHandlerMap);
+        $commandBus->appendMiddleware(
+            new DelegatesToMessageHandlerMiddleware(
+                $commandHandlerResolver
+            )
+        );
+
+        return $commandBus;
     }
 
     /**
